@@ -26,7 +26,7 @@
             align-items: center;
             height: 100vh;
             margin: 0;
-            background-color: #f4f4f4;
+            background-color: #ff41a3;
             overflow: hidden;
             position: relative;
             cursor: url("https://blog.kakaocdn.net/dn/BQXpN/btq3qNR67Lg/8tx8tGzkOcr5BuX5dyIaKk/img.png"), auto;
@@ -114,37 +114,75 @@
             }
         }
 
+        @media screen and (max-width: 768px) {
+            img{
+                height: 100%;
+                border: none;
+            }
+
+            .row2{
+                height: 28%;
+            }
+            .row{
+                height: 15%;
+            }
+            
+        }
+
         /* floating 문자 스타일 */
         .floating-text {
             position: absolute;
-            font-size: 1rem;
+            font-size: 1.5rem;
             color: rgb(0, 0, 0);
             animation: floating 4s infinite ease-in-out;
+        }
+
+        /* 토글 버튼 스타일 */
+        #toggleButton {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #000000;
+            color: #ffffff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 16px;
+            z-index: 10;
         }
 
     </style>
 </head>
 <body>
+    <!-- 언어 토글 버튼 -->
+    <button id="toggleButton">English</button>
+
     <div class="container">
         <div class="row">
-            <p>우리의 프로젝트를 봐주셔서 감사합니다.^^  Thank you for visit our website.^^</p>
+            <p id="text1">우리의 프로젝트를 봐주셔서 감사합니다.^^  Thank you for visiting our website.^^</p>
         </div>
         <div class="row2">
-            <img id="image1" src="Group 9.png" alt="예">
+            <a href="https://www.yewoncalli.com/#wordwideweb">
+                <img id="image1" src="Group 9.png" alt="예">
+            </a>
         </div>
         <div class="row2">
-            <img id="image2" src="Group 7.png" alt="이">
+            <a href="https://kr.linkedin.com/in/bomi-kwon-0461472b5">
+                <img id="image2" src="Group 7.png" alt="이">
+            </a>
         </div>
         <div class="row">
-            <p>Creative-coding, website, 그리고 귀여운 것들에 관심이 많습니다.  We are interest in Creative-coding, website, and cute things.</p>
+            <p id="text2">Creative-coding, website, 그리고 귀여운 것들에 관심이 많습니다.  We are interested in Creative-coding, websites, and cute things.</p>
         </div>
     </div>
 
     <!-- floating 문자들 -->
-    <div class="floating-text">˗ˋˏ와ˎˊ˗</div>
-    <div class="floating-text"> ̀ ̗대박 ̖ ́ ̵</div>
-    <div class="floating-text">˗ˋˏ 진짜 ˎˊ˗ </div>
-    <div class="floating-text">˗ˋˏ 귀여워 ˎˊ˗</div>
+    <div class="floating-text" id="floating-text1">˗ˋˏ와ˎˊ˗</div>
+    <div class="floating-text" id="floating-text2"> ̀ ̗대박 ̖ ́ ̵</div>
+    <div class="floating-text" id="floating-text3">˗ˋˏ 진짜 ˎˊ˗ </div>
+    <div class="floating-text" id="floating-text4">˗ˋˏ 귀여워 ˎˊ˗</div>
+    
+
 
     <script>
         // 랜덤 위치 설정 함수
@@ -166,6 +204,39 @@
             image.onload = () => {
                 image.style.animation = "slideIn 5s ease-in-out forwards";
             };
+        });
+
+        // 언어 토글 기능 구현
+        const toggleButton = document.getElementById('toggleButton');
+        const text1 = document.getElementById('text1');
+        const text2 = document.getElementById('text2');
+        const floatingtext1 = document.getElementById('floating-text1');
+        const floatingtext2 = document.getElementById('floating-text2');
+        const floatingtext3 = document.getElementById('floating-text3');
+        const floatingtext4 = document.getElementById('floating-text4');
+        let isKorean = true;
+
+        toggleButton.addEventListener('click', () => {
+            if (isKorean) {
+                // 영어로 변경
+                text1.textContent = 'Thank you for visiting our website.^^';
+                text2.textContent = 'We are interested in Creative-coding, websites, and cute things.';
+                floatingtext1.textContent = '˗ˋˏWowˎˊ˗';
+                floatingtext2.textContent = '˗ˋˏAwesomeˎˊ˗';
+                floatingtext3.textContent = '˗ˋˏReallyˎˊ˗';
+                floatingtext4.textContent = '˗ˋˏCuteˎˊ˗';
+                toggleButton.textContent = 'Korean';
+            } else {
+                // 한국어로 변경
+                text1.textContent = '우리의 프로젝트를 봐주셔서 감사합니다.^^';
+                text2.textContent = 'Creative-coding, website, 그리고 귀여운 것들에 관심이 많습니다.';
+                floatingtext1.textContent = '˗ˋˏ와ˎˊ˗';
+                floatingtext2.textContent = ' ̀ ̗대박 ̖ ́ ̵';
+                floatingtext3.textContent = '˗ˋˏ 진짜 ˎˊ˗';
+                floatingtext4.textContent = '˗ˋˏ 귀여워 ˎˊ˗';
+                toggleButton.textContent = 'English';
+            }
+            isKorean = !isKorean;
         });
 
     </script>
