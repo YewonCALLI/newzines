@@ -28,10 +28,11 @@
             margin: 0;
             background-color: #f4f4f4;
             overflow: hidden;
+            position: relative;
         }
 
         .container {
-            top:0px;
+            top: 0;
             position: absolute;
             width: 100%;
             height: 100%;
@@ -59,16 +60,17 @@
             object-fit: cover;
             border-left: #000000 8px solid;
             border-right: #000000 8px solid;
-            opacity: 0;  /* 처음에 이미지가 보이지 않도록 설정 */
-            transform: translateX(200%);  /* 이미지가 화면 오른쪽 밖에서 시작 */
-            animation: slideIn 14s infinite ease-in-out;
+            opacity: 0;
+            animation: slideIn 5s ease-in-out;
+            animation-iteration-count: 1;
+            animation-fill-mode: forwards;
         }
 
         p {
             text-align: center;
             font-size: 30px;
-            top:50%;
-            margin: 0px;
+            top: 50%;
+            margin: 0;
             animation: slideText 14s infinite ease-in-out;
             white-space: nowrap;
         }
@@ -76,53 +78,49 @@
         @keyframes slideText {
             0% {
                 transform: translateX(200%);
-                display: none;
             }
             50% {
                 transform: translateX(0);
-                display: block;
             }
             100% {
                 transform: translateX(-200%);
             }
         }
 
-        /* 이미지가 오른쪽에서 들어오는 애니메이션 */
         @keyframes slideIn {
             0% {
                 opacity: 0;
                 transform: translateX(250%);
-                display: none;
             }
-            1% {
+            10% {
                 opacity: 1;
-                display: block;
             }
-            50% {
+            100% {
                 opacity: 1;
                 transform: translateX(0);
             }
+        }
+
+        /* floating 애니메이션 */
+        @keyframes floating {
+            0% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-15px);
+            }
             100% {
-                transform: translateX(-200%);
-                opacity: 1;
+                transform: translateY(0);
             }
         }
 
-        /* 각 애니메이션에 delay를 다르게 적용 */
-        .row p {
-            animation-delay: 0s;
-        }
-
-        .row2:nth-of-type(1) img {
-            animation-delay: 0s;
-        }
-
-        .row2:nth-of-type(2) img {
-            animation-delay: 1s;
-        }
-
-        .row:nth-of-type(4) p {
-            animation-delay: 0s;
+        /* floating 문자 스타일 */
+        .floating-text {
+            position: absolute;
+            font-size: 28px;
+            color: rgb(0, 255, 17);
+            animation: floating 4s infinite ease-in-out;
+            opacity: 0.8;
         }
 
     </style>
@@ -142,5 +140,28 @@
             <p>Creative-coding, website, 그리고 귀여운 것들에 관심이 많습니다.</p>
         </div>
     </div>
+
+    <!-- floating 문자들 -->
+    <div class="floating-text">(ღˇᴗˇ)</div>
+    <div class="floating-text">( ˘ ³˘)♥</div>
+    <div class="floating-text">˗ˋˏ와ˎˊ˗</div>
+    <div class="floating-text"> ̀ ̗대박 ̖ ́ ̵</div>
+    <div class="floating-text">˗ˋˏ 진짜 ˎˊ˗ </div>
+    <div class="floating-text">˗ˋˏ 귀여워 ˎˊ˗</div>
+
+    <script>
+        // 랜덤 위치 설정 함수
+        function randomPosition(element) {
+            const randomTop = Math.floor(Math.random() * 92);  // 0~90% 사이의 랜덤 값
+            const randomRight = Math.floor(Math.random() * 60); // 0~90% 사이의 랜덤 값
+            element.style.top = randomTop + '%';
+            element.style.right = randomRight + '%';
+        }
+
+        // 모든 floating-text 요소들을 랜덤 위치로 설정
+        document.querySelectorAll('.floating-text').forEach(element => {
+            randomPosition(element);
+        });
+    </script>
 </body>
 </html>
